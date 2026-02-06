@@ -41,6 +41,19 @@ public class MyBot extends TelegramLongPollingBot {
                     e.printStackTrace();
                 }
             }
+
+            if (text.equals("/read")){
+                String readUserForDatabase = database.readUserForDatabase();
+                SendMessage sendMessage = new SendMessage();
+                sendMessage.setChatId(chatId);
+                sendMessage.setText(readUserForDatabase);
+
+                try {
+                    execute(sendMessage);
+                } catch (TelegramApiException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 
